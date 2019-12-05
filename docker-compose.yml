@@ -1,0 +1,36 @@
+version: '2'
+
+services:
+    mqtt-monitor:
+        container_name: mqtt-monitor
+        build: ./MQTTMonitor
+        network_mode: "host"     
+        ports:
+            - 8080:8080
+        
+        depends_on:
+            - mqtt-broker 
+    mqtt-broker:
+        image: emqx/emqx
+        container_name: mqtt-broker
+       
+        ports:
+            - 1883:1883
+            - 8083:8083
+            - 8084:8084
+            - 18083:18083
+
+    grafana:
+        image: grafana/grafana
+        container_name: grafana
+        network_mode: "host"
+        ports:
+            - 3000:3000
+
+    
+
+
+
+
+        
+
