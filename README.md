@@ -55,7 +55,7 @@
 
 ### Docker Compose
 
-        Docker Compose是Docker官方编排（Orchestration）项目之一，负责快速的部署分布式应用。其代码目前在https://github.com/docker/compose上开源。Compose 定位是 「定义和运行多个 Docker 容器的应用（Defining and running multi-container Docker applications）」，其前身是开源项目Fig.
+   Docker Compose是Docker官方编排（Orchestration）项目之一，负责快速的部署分布式应用。其代码目前在https://github.com/docker/compose上开源。Compose 定位是 「定义和运行多个 Docker 容器的应用（Defining and running multi-container Docker applications）」，其前身是开源项目Fig.
 
  Docker Compose 的两个重要概念：
 
@@ -64,7 +64,7 @@
 
 ## 2.2 Raspberry PI
 
-      Revolution Pi是一款开源、模块化和低成本的工业电脑基于流行的树莓派(Raspberry Pi)。操作系统采用的是定制的Raspbian版本，其包括一个实时内核补丁。这样能够尽可能地接近树莓派的原始开发环境并且还能获得高水平的控制，涵盖调度表管理的任务优先权。调度表，其通过操作系统控制任务的执行，和这个修改的内核一起被扩展配置，因此通常由网络和其它I/O访问造成的延迟被有效避免。用于扩展模块的相应的驱动也已经被预装。
+   Revolution Pi是一款开源、模块化和低成本的工业电脑基于流行的树莓派(Raspberry Pi)。操作系统采用的是定制的Raspbian版本，其包括一个实时内核补丁。这样能够尽可能地接近树莓派的原始开发环境并且还能获得高水平的控制，涵盖调度表管理的任务优先权。调度表，其通过操作系统控制任务的执行，和这个修改的内核一起被扩展配置，因此通常由网络和其它I/O访问造成的延迟被有效避免。用于扩展模块的相应的驱动也已经被预装。
 
 对于所有那些需要性能和存储的丰富，RevPi Core 3+带快速树莓派计算模块3+是准确的选择。Broadcom的4核处理器具有足够的计算功率来处理甚复杂的任务。
 
