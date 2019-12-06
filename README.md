@@ -49,7 +49,7 @@
 
 ### Docker
 
-      Docker的英文翻译是“搬运工”的意思，搬运的东西就是我们常说的集装箱Container，Container 里面装的是任意类型的 App，开发人员可以通过 Docker 将App 变成一种标准化的、可移植的、自管理的组件，我们可以在任何主流的操作系统中开发、调试和运行。
+   Docker的英文翻译是“搬运工”的意思，搬运的东西就是我们常说的集装箱Container，Container 里面装的是任意类型的 App，开发人员可以通过 Docker 将App 变成一种标准化的、可移植的、自管理的组件，我们可以在任何主流的操作系统中开发、调试和运行。
 
 ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/441ec113-5d94-4961-93cc-c68f307f32aa/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/441ec113-5d94-4961-93cc-c68f307f32aa/Untitled.png)
 
