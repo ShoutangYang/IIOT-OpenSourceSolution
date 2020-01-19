@@ -51,7 +51,7 @@
 
    Docker的英文翻译是“搬运工”的意思，搬运的东西就是我们常说的集装箱Container，Container 里面装的是任意类型的 App，开发人员可以通过 Docker 将App 变成一种标准化的、可移植的、自管理的组件，我们可以在任何主流的操作系统中开发、调试和运行。
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/441ec113-5d94-4961-93cc-c68f307f32aa/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/441ec113-5d94-4961-93cc-c68f307f32aa/Untitled.png)
+![docker](./assets/docker.png)
 
 ### Docker Compose
 
@@ -70,9 +70,10 @@
 
 数据采集节点使用了一个树莓派计算模块，同一个模拟I/O模，RevPi AIO具有一个28-pin I/O连接器在前端。通过使用RevPi AIO，Revolution Pi系统可扩展到4路模拟输入、2路模拟输出和2路RTD通道。数据采集节点如下所示。
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4f8e2b2e-c919-4674-9568-c3e03360b5a7/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/4f8e2b2e-c919-4674-9568-c3e03360b5a7/Untitled.png)
+![PI](./assets/PI.png)
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/282960af-1f68-4646-9f20-617f554c190f/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/282960af-1f68-4646-9f20-617f554c190f/Untitled.png)
+![PI-Node](./assets/PI-Node.png)
+
 
 ## 2.3 InfluxDB
 
@@ -115,7 +116,7 @@ EMQ 缺点:
 
 MQTT 的通信是通过发布/订阅的方式来实现的，消息的发布方和订阅方通过这种方式来进行解耦，它们没有直接地连接，它们需要一个中间方。在 MQTT 里面我们称之为 Broker，用来进行消息的存储和转发。一次典型的 MQTT 消息通信流程如下所示：
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b872a7d5-ff54-4285-9d72-0804cfd21961/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b872a7d5-ff54-4285-9d72-0804cfd21961/Untitled.png)
+![MQTT](./assets/MQTT.png)
 
 本开源系统工业数据的流向：
 
