@@ -17,7 +17,7 @@
 
 # 2.系统架构
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2f837cb3-7b48-4022-aa98-20509a630300/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/2f837cb3-7b48-4022-aa98-20509a630300/Untitled.png)
+![IIOT](./assets/IIOT.png)
 
 服务器：
 
