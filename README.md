@@ -175,3 +175,55 @@ services:
             - 3000:3000
 
 ```
+
+## 3.2 云部署
+1. 登陆云主机 ，系统为centos7.6 64bits,4G内存；
+
+2. 安装 docker-ce
+```docker
+yum update
+
+sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+
+
+sudo yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+
+
+sudo yum makecache fast
+
+sudo yum install docker-ce
+```
+3. 安装docker-compose
+采用 pip 方式安装，Docker-compose，首先确保安装python3版本的环境，并将pip 设置成aliyun 镜像。
+设置pip国内镜像，想要操作以下步骤：
+```
+cd /root/
+mkdir .pip
+cd .pip
+touch pip.conf
+```
+将 pip.conf 包含以下信息。
+```
+[global]
+index-url=http://mirrors.aliyun.com/pypi/simple/
+trusted-host=mirrors.aliyun.com
+```
+
+index-url=http://mirrors.aliyun.com/pypi/simple/，是指定阿里云源；
+
+trusted-host=mirrors.aliyun.com，是信任阿里云站点
+
+```
+yum -y install -y epel-release	#安装pip需要先安装epel-release包
+
+yum install -y python-pip	#安装pip
+
+pip install --upgrade pip	#升级pip
+
+pip install docker-compose #安装docker-compose
+
+docker-compose -v	#查看docker-compose的版本
+```
+4.测试运行环境
+5.从github 上clone项目到本地；
+6.
