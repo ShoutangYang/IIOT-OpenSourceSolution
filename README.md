@@ -322,8 +322,8 @@ if __name__ == "__main__":
     client.disconnect()
 ```
 
-2. 制作系统服务脚本；
-创建自定义服务脚本文件，并将下面脚本编写到服务文件中。
+2. 制作系统服务脚本；
+ 创建自定义服务脚本文件，并将下面脚本编写到服务文件中。
 ```
 touch /etc/systemd/system/huasui-node.service
  vim /etc/systemd/system/huasui-node.service
@@ -346,14 +346,16 @@ WantedBy=multi-user.target
 
 ```
 
-3. 加载配置文件，并且启动服务。
+3.  加载配置文件，并且启动服务。
+
 ```
 sudo systemctl daemon-reload
 systemctl enable huasui-node.service
 systemctl start huasui-node.service
 sudo journalctl -f -u huasui-node.service
 ```
-4. 将自定义服务加载到系统开机项。
+4. 将自定义服务加载到系统开机启动项。
+
 ```
 systemctl enable huasui-node.service
 systemctl list-unit-files |   grep enableser
