@@ -177,7 +177,7 @@ services:
 ```
 
 ## 3.2 云部署
-1. 登陆云主机 ，系统为centos7.6 64bits,4G内存；
+1. 登陆云主机 ，系统为centos7.6 64bits,4G内存以上；
 
 2. 安装 docker-ce
 ```docker
@@ -226,4 +226,136 @@ docker-compose -v	#查看docker-compose的版本
 ```
 4.测试运行环境
 5.从github 上clone项目到本地；
-6.
+首先确保在主机上安装有git,如若没有安装git,通过pip安装git.
+```
+pip install git
+```
+
+```
+git clone https://github.com/ShoutangYang/IIOT-OpenSourceSolution.git
+
+cd IIOT-OpenSourceSolution
+
+docker-compose build
+
+docker-compose up -d
+```
+
+## 3.3 数据采集节点部署
+
+1. python脚本运行的代码，需要将以下puthon脚本代码加载到系统服务中。
+
+```python
+#-*-coding:utf-8-*-
+
+# 导入 paho-mqtt 的 Client：
+import paho.mqtt.client as mqtt
+
+import time
+import revpimodio2
+unacked_sub = [] #未获得服务器响应的订阅消息 id 列表
+
+# 用于响应服务器端 CONNACK 的 callback，如果连接正常建立，rc 值为 0
+def on_connect(client, userdata, flags, rc):
+    print("Connection returned with result code:" + str(rc))
+
+
+# 用于响应服务器端 PUBLISH 消息的 callback，打印消息主题和内容
+def on_message(client, userdata, msg):
+    print("Received message, topic:" + msg.topic + "payload:" + str(msg.payload))
+
+# 在连接断开时的 callback，打印 result code
+def on_disconnect(client, userdata, rc):
+    print("Disconnection returned result:"+ str(rc))
+
+# 在订阅获得服务器响应后，从为响应列表中删除该消息 id
+def on_subscribe(client, userdata, mid, granted_qos):
+    unacked_sub.remove(mid)
+
+if __name__ == "__main__":
+    # 构造一个 Client 实例
+    client = mqtt.Client()
+    client.on_connect = on_connect
+    client.on_disconnect= on_disconnect
+    client.on_message = on_message
+    client.on_subscribe = on_subscribe
+
+    rpi = revpimodio2.RevPiModIO(autorefresh=True)
+    rpi
+    rpi.io.OutputValue_1.value=3500
+    print("input 1 = "+str(rpi.io.InputValue_1.value))
+    print(rpi.core.temperature)
+    # 连接 broker
+    # connect() 函数是阻塞的，在连接成功或失败后返回。如果想使用异步非阻塞方式，可以使用 connect_async() 函数。
+    client.connect("150.168.1.76", 1883, 60)
+
+    client.loop_start()
+
+    # 订阅单个主题
+    #result, mid = client.subscribe("hello", 0)
+    #unacked_sub.append(mid)
+    # 订阅多个主题
+    #result, mid = client.subscribe([("temperature", 0), ("humidity", 0)])
+    #unacked_sub.append(mid)
+
+    while len(unacked_sub) != 0:
+        time.sleep(1)
+
+    client.publish("hello", payload = "Hello world!")
+    #client.publish("Temperature", payload = "24.0")
+    client.publish("humidity", payload = "65%")
+
+    while True:
+        client.publish("Input_1",payload=str(rpi.io.InputValue_1.value))
+        print("input 1 = "+str(rpi.io.InputValue_1.value))
+        client.publish("Input_2",payload=str(rpi.io.InputValue_2.value))
+        print("input 2 = "+str(rpi.io.InputValue_2.value))
+        client.publish("Input_3",payload=str(rpi.io.InputValue_3.value))
+        print("input 3 = "+str(rpi.io.InputValue_3.value))
+        client.publish("Temperature",payload=str(rpi.core.temperature))
+        print("Temperature = "+str(rpi.core.temperature))
+        time.sleep(5)
+
+    # 断开连接
+    time.sleep(20) #等待消息处理结束
+    client.loop_stop()
+    client.disconnect()
+```
+
+2. 制作系统服务脚本；
+创建自定义服务脚本文件，并将下面脚本编写到服务文件中。
+```
+touch /etc/systemd/system/huasui-node.service
+ vim /etc/systemd/system/huasui-node.service
+```
+
+```bash
+[Unit]
+Description=huasui-node service
+After=network.target
+StartLimitIntervalSec=60
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=60
+ExecStart=/usr/bin/python3 /home/pi/project/code/mqtt_publish.py
+
+[Install]
+WantedBy=multi-user.target
+
+```
+
+3. 加载配置文件，并且启动服务。
+```
+sudo systemctl daemon-reload
+systemctl enable huasui-node.service
+systemctl start huasui-node.service
+sudo journalctl -f -u huasui-node.service
+```
+4. 将自定义服务加载到系统开机项。
+```
+systemctl enable huasui-node.service
+systemctl list-unit-files |   grep enableser
+service huausi-node status
+```
