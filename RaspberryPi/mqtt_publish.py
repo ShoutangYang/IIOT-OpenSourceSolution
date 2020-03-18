@@ -39,7 +39,7 @@ if __name__ == "__main__":
     print(rpi.core.temperature)
     # 连接 broker
     # connect() 函数是阻塞的，在连接成功或失败后返回。如果想使用异步非阻塞方式，可以使用 connect_async() 函数。
-    client.connect("150.168.1.76", 1883, 60)
+    client.connect("47.100.113.117", 1883, 60)
 
     client.loop_start()
 
@@ -58,15 +58,15 @@ if __name__ == "__main__":
     client.publish("humidity", payload = "65%")
 
     while True:
-        re=client.publish("Node2_Input_1",payload=str(rpi.io.InputValue_1.value))
+        re=client.publish("Node1_Input_1",payload=str(rpi.io.RTDValue_1.value))
         print(re)
-        print("Node2_input 1 = "+str(rpi.io.InputValue_1.value))
-        client.publish("Node2_Input_2",payload=str(rpi.io.InputValue_2.value))
-        print("Node2_input 2 = "+str(rpi.io.InputValue_2.value))
-        client.publish("Node2_Input_3",payload=str(rpi.io.InputValue_3.value))
-        print("Node2_input 3 = "+str(rpi.io.InputValue_3.value))
-        client.publish("Node2_Temperature",payload=str(rpi.core.temperature))
-        print("Node2_Temperature = "+str(rpi.core.temperature))
+        print("Node1_input 1  RTD = "+str(rpi.io.RTDValue_1.value))
+        client.publish("Node1_Input_2",payload=str(rpi.io.InputValue_2.value))
+        print("Node1_input 2 = "+str(rpi.io.InputValue_2.value))
+        client.publish("Node1_Input_3",payload=str(rpi.io.InputValue_3.value))
+        print("Node1_input 3 = "+str(rpi.io.InputValue_3.value))
+        client.publish("Node1_Temperature",payload=str(rpi.core.temperature))
+        print("Node1_Temperature = "+str(rpi.core.temperature))
         time.sleep(10)
 
     # 断开连接
