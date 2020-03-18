@@ -1,4 +1,9 @@
-# IIOT工业物联网数据可视化开源系统
+# TSDB数据可视化系统
+
+---
+```
+                        create by huasui's shoutang.yang 
+```
 
 # 1.关于本系统
 
@@ -243,7 +248,7 @@ docker-compose up -d
 
 ## 3.3 数据采集节点部署
 
-1. python脚本运行的代码，需要将以下puthon脚本代码加载到系统服务中。
+1. python脚本运行的代码，需要将以下python脚本代码加载到系统服务中。
 
 ```python
 #-*-coding:utf-8-*-
